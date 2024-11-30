@@ -1,0 +1,56 @@
+html,
+body {
+    height: 100%;
+}
+
+.form-signin {
+    max-width: 450px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.message-box {
+    border: 2px solid grey;
+    border-radius: 10px;
+    background-color: #212528;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    align-items: stretch;
+    padding: 10px;
+}
+
+.messages {
+    overflow-y: scroll; 
+    flex: 1;
+    width: 100%;
+}
+
+.inputs {
+    padding: 10px;
+    display: flex;
+}
+
+h2 {
+    text-align: center;
+}
+
+#messages {
+    flex: 1;
+}

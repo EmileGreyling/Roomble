@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="mx-auto message-box">
+    <h2>Chat Room: {{ code }}</h2>
+
+    <div class="messages" id="messages"></div>
+    <div class="input-group my-3">
+        <input type="text" class="form-control py-2" placeholder="Message" name="message" id="message" />
+        <button type="button" class="btn btn-primary" name="send" id="send-btn" onClick="sendMessage()">Send</button>
+    </div>
+</main>
+
+<script type="text/javascript">
+    var socketio = io();
+
+    const messages = document.getElementById("messages");
+
+    const createMessage = (name, msg) => {
+        const content = `
+        <div class="d-flex justify-content-between align-items-center">
+            <span>
+                <strong>${name}</strong>: ${msg}
+            </span>
+            <span class="text-body-secondary ms-auto">
+                ${new Date().toLocaleString()}
+            </span>
+        </div>
+        `;
+
+        messages.innerHTML += content;
+    }
+
+    socketio.on("message", (data) => {
+        createMessage(data.name, data.message);
+    })
+
+    const sendMessage = () => {
+        const message = document.getElementById("message");
+
+        if (message.value == "") return;
+        socketio.emit("message", { data: message.value });
+        message.value = "";
+    }
+</script>
+
+{% for msg in messages %}
+<script type="text/javascript">
+    createMessage('{{ msg.name }}', '{{ msg.message }}');
+</script>
+{% endfor %}
+{% endblock %}
